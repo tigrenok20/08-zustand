@@ -3,8 +3,8 @@
 import { updateMe, UpdateMeRequest } from "@/lib/api/clientApi";
 import { useAuthStore } from "@/lib/store/authStore";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import css from "./EditProfilePage.module.css";
+import { useRouter } from "next/navigation";
 
 export default function EditProfile() {
   const user = useAuthStore((store) => store.user);
@@ -12,11 +12,12 @@ export default function EditProfile() {
   const router = useRouter();
 
   const handleSave = async (formData: FormData) => {
-    const updateMeRequest = Object.fromEntries(
-      formData,
-    ) as unknown as UpdateMeRequest;
-    const user = await updateMe(updateMeRequest);
-    setUser(user);
+    const updateMeRequest = {
+      ...Object.fromEntries(formData),
+      email: user!.email,
+    } as unknown as UpdateMeRequest;
+    const updatedUser = await updateMe(updateMeRequest);
+    setUser(updatedUser);
     router.push("/profile");
   };
 
@@ -26,7 +27,7 @@ export default function EditProfile() {
         <h1 className={css.formTitle}>Edit Profile</h1>
 
         <Image
-          src="avatar"
+          src={user!.avatar}
           alt="User Avatar"
           width={120}
           height={120}
@@ -38,6 +39,7 @@ export default function EditProfile() {
             <label htmlFor="username">Username:</label>
             <input
               id="username"
+              name="username"
               type="text"
               className={css.input}
               defaultValue={user!.username}

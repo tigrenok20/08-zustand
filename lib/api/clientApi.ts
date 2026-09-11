@@ -69,11 +69,13 @@ export async function logout() {
 }
 
 export interface CheckSessionResponse {
-  message: string;
+  success: boolean;
 }
 
 export async function checkSession() {
-  await nextServer.get<CheckSessionResponse>(`/auth/session`);
+  const { data } = await nextServer.get<CheckSessionResponse>(`/auth/session`);
+
+  return data;
 }
 
 export async function getMe() {

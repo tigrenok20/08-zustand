@@ -16,27 +16,27 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     (store) => store.clearIsAuthenticated,
   );
 
-  const { data: user, isError } = useQuery({
+  const { data: user, isLoading } = useQuery({
     queryKey: ["check-get-me"],
     queryFn: async () => {
-      await checkSession();
+      if ((await checkSession()).success) {
+        return getMe();
+      }
 
-      return getMe();
+      return null;
     },
   });
 
   useEffect(() => {
     if (user) {
       setUser(user);
-    }
-
-    if (isError) {
+    } else if (isLoading) {
       clearIsAuthenticated();
     }
-  }, [user, isError, setUser, clearIsAuthenticated]);
+  }, [user, isLoading, setUser, clearIsAuthenticated]);
 
-  if (!user) {
-    return <Loader />;
+  if (isLoading) {
+    return <p>Loading, please wait...</p>;
   }
 
   return <>{children}</>;

@@ -1,11 +1,11 @@
 "use client";
 
-import { useRouter } from "next/router";
 import css from "./SignUpPage.module.css";
 import { useState } from "react";
 import { register, RegisterRequest } from "@/lib/api/clientApi";
 import { ApiError } from "@/lib/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const router = useRouter();

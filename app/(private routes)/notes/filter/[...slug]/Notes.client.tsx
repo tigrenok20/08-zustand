@@ -2,7 +2,6 @@
 
 import Pagination from "@/components/Pagination/Pagination";
 import SearchBox from "@/components/SearchBox/SearchBox";
-import { fetchNotes, FIRST_PAGE } from "@/lib/api/api";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useState } from "react";
@@ -12,6 +11,7 @@ import css from "./Notes.client.module.css";
 import NoteList from "@/components/NoteList/NoteList";
 import Loader from "@/components/Loader/Loader";
 import ErrorMessage from "@/components/ErrorMessage/ErrorMessage";
+import { fetchNotes, FIRST_PAGE } from "@/lib/api/clientApi";
 
 const DEBOUNCE_DELAY_MS = 300;
 

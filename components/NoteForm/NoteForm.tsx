@@ -4,10 +4,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { createNote } from "@/lib/api/api";
 import { useNoteStore } from "@/lib/store/noteStore";
 import { NoteTagValues, type NoteTag } from "../../types/note";
 import css from "./NoteForm.module.css";
+import { createNote } from "@/lib/api/clientApi";
 
 type FormErrors = Partial<Record<"title" | "content" | "tag", string>>;
 
@@ -81,7 +81,6 @@ export default function NoteForm() {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
-    // 4. Коли користувач змінює будь-яке поле форми — оновлюємо стан
     setDraft({
       ...draft,
       [event.target.name]: event.target.value,
