@@ -2,7 +2,6 @@
 
 import { checkSession, getMe } from "@/lib/api/clientApi";
 import { useQuery } from "@tanstack/react-query";
-import Loader from "../Loader/Loader";
 import { useEffect } from "react";
 import { useAuthStore } from "@/lib/store/authStore";
 
