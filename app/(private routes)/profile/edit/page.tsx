@@ -21,6 +21,10 @@ export default function EditProfile() {
     router.push("/profile");
   };
 
+  const handleCancel = () => {
+    router.back();
+  };
+
   return (
     <main className={css.mainContent}>
       <div className={css.profileCard}>
@@ -52,7 +56,11 @@ export default function EditProfile() {
             <button type="submit" className={css.saveButton}>
               Save
             </button>
-            <button type="button" className={css.cancelButton}>
+            <button
+              type="button"
+              className={css.cancelButton}
+              onClick={handleCancel}
+            >
               Cancel
             </button>
           </div>

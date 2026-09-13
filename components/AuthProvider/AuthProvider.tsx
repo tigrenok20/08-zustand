@@ -29,7 +29,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     if (user) {
       setUser(user);
-    } else if (isLoading) {
+    } else if (!isLoading) {
       clearIsAuthenticated();
     }
   }, [user, isLoading, setUser, clearIsAuthenticated]);
